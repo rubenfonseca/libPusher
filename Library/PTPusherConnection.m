@@ -17,7 +17,6 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 @interface PTPusherConnection ()
 @property (nonatomic, copy) NSString *socketID;
-@property (nonatomic, assign) PTPusherConnectionState state;
 
 - (void)respondToPingEvent;
 @end

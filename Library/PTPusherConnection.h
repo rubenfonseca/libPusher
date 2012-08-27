@@ -36,6 +36,7 @@ typedef enum {
 @property (nonatomic, unsafe_unretained) id<PTPusherConnectionDelegate> delegate;
 @property (nonatomic, readonly, getter=isConnected) BOOL connected;
 @property (nonatomic, copy, readonly) NSString *socketID;
+@property (nonatomic, assign) PTPusherConnectionState state;
 
 ///------------------------------------------------------------------------------------/
 /// @name Initialisation
