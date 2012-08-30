@@ -40,8 +40,9 @@
  
  @param channel The presence channel that was subscribed to.
  @param memberID The ID of the member removed.
+ @param memberInfo The custom user data for the leaving member.
  @param index The internal index of the member (depends on the order joined/left or returned in the server member list)
  */
-- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberRemovedWithID:(NSString *)memberID atIndex:(NSInteger)index;
+- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberRemovedWithID:(NSString *)memberID memberInfo:(NSDictionary *)memberInfo atIndex:(NSInteger)index;
 
 @end

@@ -353,10 +353,12 @@
 - (void)handleMemberRemovedEvent:(PTPusherEvent *)event
 {
   NSString *memberID = [event.data valueForKey:@"user_id"];
+	NSDictionary *memberInfo = [self infoForMemberWithID:memberID];
+	
   NSInteger memberIndex = [memberIDs indexOfObject:memberID];
   [memberIDs removeObject:memberID];
   [members removeObjectForKey:memberID]; 
-  [self.presenceDelegate presenceChannel:self memberRemovedWithID:memberID atIndex:memberIndex];
+  [self.presenceDelegate presenceChannel:self memberRemovedWithID:memberID memberInfo:memberInfo atIndex:memberIndex];
 }
 
 @end
