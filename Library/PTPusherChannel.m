@@ -14,6 +14,7 @@
 #import "PTBlockEventListener.h"
 #import "PTPusherChannelAuthorizationOperation.h"
 #import "PTPusherErrors.h"
+#import "PTJSON.h"
 
 @interface PTPusher ()
 - (void)__unsubscribeFromChannel:(PTPusherChannel *)channel;
@@ -364,6 +365,24 @@
   [memberIDs removeObject:memberID];
   [members removeObjectForKey:memberID]; 
   [self.presenceDelegate presenceChannel:self memberRemovedWithID:memberID memberInfo:memberInfo atIndex:memberIndex];
+}
+
+- (void)subscribeWithAuthorization:(NSDictionary *)authData
+{
+  if (self.isSubscribed) return;
+	
+	NSString *channelData = [authData objectForKey:@"channel_data"];
+	if(channelData) {
+		NSDictionary *channelDataObject = [[PTJSON JSONParser] objectFromJSONString:channelData];
+		userID = [channelDataObject objectForKey:@"user_id"];
+	}
+	[super subscribeWithAuthorization:authData];
+}
+
+- (NSDictionary *)me {
+	if(!userID) return nil;
+	
+	return @{ @"id" : userID, @"info" : [self infoForMemberWithID:userID] };
 }
 
 @end

@@ -149,6 +149,7 @@
 @interface PTPusherPresenceChannel : PTPusherPrivateChannel {
   NSMutableDictionary *members;
   NSMutableArray *memberIDs; // store these separately to preserve order
+	NSString *userID;
 }
 
 ///------------------------------------------------------------------------------------/
@@ -181,4 +182,6 @@
 /** Returns the number of members currently connected to this channel.
  */
 - (NSInteger)memberCount;
+
+- (NSDictionary *)me;
 @end
