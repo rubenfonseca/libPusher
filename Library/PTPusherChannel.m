@@ -231,7 +231,12 @@
 
 - (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler
 {
-  PTPusherChannelAuthorizationOperation *authOperation = [PTPusherChannelAuthorizationOperation operationWithAuthorizationURL:pusher.authorizationURL channelName:self.name socketID:pusher.connection.socketID];
+	NSDictionary *additionalData = [NSDictionary dictionary];
+	if([pusher.delegate respondsToSelector:@selector(additionalDataForChannelAuthorization)]) {
+		additionalData = [pusher.delegate additionalDataForChannelAuthorization];
+	}
+	
+  PTPusherChannelAuthorizationOperation *authOperation = [PTPusherChannelAuthorizationOperation operationWithAuthorizationURL:pusher.authorizationURL channelName:self.name socketID:pusher.connection.socketID additionalData:additionalData];
   
   [authOperation setCompletionHandler:^(PTPusherChannelAuthorizationOperation *operation) {
     completionHandler(operation.isAuthorized, operation.authorizationData, operation.error);

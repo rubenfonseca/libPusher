@@ -23,4 +23,5 @@ typedef enum {
 @property (nonatomic, readonly) NSError *error;
 
 + (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID;
++ (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID additionalData:(NSDictionary *)data;
 @end

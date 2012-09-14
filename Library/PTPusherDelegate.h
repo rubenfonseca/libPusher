@@ -88,6 +88,13 @@
  */
 - (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request;
 
+/** Allows the client to add additional params to the HTTP body of the authorize channel request.
+ 
+ By implementing this delegate method, you will be given the opportunity to add additional params to
+ the request body of the authorization channel request.
+ */
+- (NSDictionary *)additionalDataForChannelAuthorization;
+
 /** Notifies the delegate that the PTPusher instance has subscribed to the specified channel.
  
  This method will be called after any channel authorization has taken place and when a subscribe event has been received.

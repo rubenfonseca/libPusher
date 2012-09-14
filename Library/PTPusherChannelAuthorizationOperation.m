@@ -35,6 +35,10 @@
 
 + (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID
 {
+	return [self operationWithAuthorizationURL:URL channelName:channelName socketID:socketID additionalData:nil];
+}
+
++ (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID additionalData:(NSDictionary *)data {
   NSAssert(URL, @"URL is required for authorization! (Did you set PTPusher.authorizationURL?)");
   
   // a short-circuit for testing, using a special URL
@@ -47,6 +51,9 @@
   [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
   
   NSMutableDictionary *requestData = [NSMutableDictionary dictionary];
+	if(data) {
+		[requestData addEntriesFromDictionary:data];
+	}
   [requestData setObject:socketID forKey:@"socket_id"];
   [requestData setObject:channelName forKey:@"channel_name"];
   
